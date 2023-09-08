@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function Home(){
 
-    let risultato_ingredienti = ["farina","uova","melone", "marmellata di albicocca" ]
+    let risultato_ingredienti = ["farina","farina 00", "farina 0", "farina 1", "farina 2","uova","melone", "marmellata di albicocca", "semola", "farina integrale" ]
 
     const [ ingrediente, setIngrediente ] = useState("")
     const [ visualizza, setVisualizza ] = useState(false)
@@ -33,6 +33,17 @@ export default function Home(){
         setLista(ls)
         setIngrediente("")
         setVisualizza(false)
+    }
+
+    const _onDeleteItem = (value)=>{
+        let ls = lista.filter(e => e!==value)
+        setLista(lista.filter(e => e!==value))
+        if(ls.length < 1){
+            setVisualizza(false)
+        }
+        ls = disponibili
+        ls.push(value)
+        setDisponibili(ls)
     }
     
 
@@ -71,13 +82,22 @@ export default function Home(){
                     <div>
                         {lista.map(el => {
                             return (
-                                <div key={el} className="mt-2 flex bg-gray-200 px-3 rounded-full w-fit items-center">
+                                <div key={el} className="mt-2 flex bg-gray-200 px-3 rounded-full w-fit items-center" >
                                     <label className="text-lg" >{el}</label>
-                                    <img src={require("../../image/x.png")} alt="X" className="w-4 h-4 ml-2"/>
+                                    <img src={require("../../image/x.png")} alt="X" className="w-4 h-4 ml-2"  onClick={()=>_onDeleteItem(el)}/>
                                 </div>
                             )
                         })}
                     </div>    
+                }
+
+                {
+                    lista.length > 0 &&
+                    <div className="w-full flex justify-center mt-3">
+                        <button className="w-fit bg-sky-500 text-white px-10 py-1 rounded-full">
+                            Cerca ricetta
+                        </button>
+                    </div>
                 }
             </div>
 
