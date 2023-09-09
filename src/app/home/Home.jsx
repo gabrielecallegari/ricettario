@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from "../header/Header";
 
 export default function Home(){
 
@@ -49,58 +50,63 @@ export default function Home(){
 
     
     return(
-        <div className="w-full flex flex-col  items-center overflow-hidden h-screen">
+        <div className="w-full flex flex-col  items-center overflow-hidden h-screen"  >
 
-            <h1 className="mt-3 text-3xl" >Ricettario.it</h1>
-            
-            <div className="w-5/6 border border-sky-500 px-5 py-6 rounded-xl shadow-xl flex mt-3 flex-col ">
-                <div className="w-full text-center">
-                    <label className="text-xl font-mono w-full">INSERISCI GLI INGREDIENTI</label>
-                </div>
-                <div className="w-full relative z-0">
-                    <input placeholder="farina ..." className="mt-2 w-full text-lg border-b-2 rounded-none px-1 focus:outline-none border-sky-500"
-                     value={ingrediente} onChange={ e => _inputOnChange(e.target.value)} />
-                    {visualizza &&
-                        <div className="w-full absolute z-10 divide-y divide-sky-500 border-b-2 border-sky-500 rounded-b-lg border-l-2 border-r-2">
-                            { filtro.map((el,i) => {
-                                let mclass = "bottom-0 left-0 py-2 bg-white "
-                                if(i === filtro.length-1){
-                                    mclass = "bottom-0 left-0 py-2 bg-white  rounded-b-lg"
-                                }
+            <Header/>
 
-                                return(
-                                    <div className={mclass} key={i} onClick={()=>_onSelectedInput(el)} >
-                                        <label className="ml-2 text-lg font-mono " >{el}</label>
-                                    </div>
-                                )
-                            })}
+            <div className="w-full flexflex-col" >
+
+                <img  alt="immagine" className="" src={require("../../image/imgsopra.jpg")} />
+                <div className="w-full justify-center flex">
+                    <div className="w-5/6 border border-sky-500 px-5 py-6 rounded-xl shadow-xl flex flex-col  bg-white " >
+                        <div className="w-full text-center">
+                            <label className="text-xl font-mono w-full">INSERISCI GLI INGREDIENTI</label>
                         </div>
-                    }
-                </div>
-                
-                {lista.length > 0 &&
-                    <div>
-                        {lista.map(el => {
-                            return (
-                                <div key={el} className="mt-2 flex bg-gray-200 px-3 rounded-full w-fit items-center" >
-                                    <label className="text-lg" >{el}</label>
-                                    <img src={require("../../image/x.png")} alt="X" className="w-4 h-4 ml-2"  onClick={()=>_onDeleteItem(el)}/>
+                        <div className="w-full relative z-0">
+                            <input placeholder="farina ..." className="mt-2 w-full text-lg border-b-2 rounded-none px-1 focus:outline-none border-sky-500"
+                            value={ingrediente} onChange={ e => _inputOnChange(e.target.value)} />
+                            {visualizza &&
+                                <div className="w-full absolute z-10 divide-y divide-sky-500 border-b-2 border-sky-500 rounded-b-lg border-l-2 border-r-2">
+                                    { filtro.map((el,i) => {
+                                        let mclass = "bottom-0 left-0 py-2 bg-white "
+                                        if(i === filtro.length-1){
+                                            mclass = "bottom-0 left-0 py-2 bg-white  rounded-b-lg"
+                                        }
+
+                                        return(
+                                            <div className={mclass} key={i} onClick={()=> el === "Non trovato" ? "" :_onSelectedInput(el)} >
+                                                <label className="ml-2 text-lg font-mono " >{el}</label>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
-                            )
-                        })}
-                    </div>    
-                }
+                            }
+                        </div>
+                        
+                        {lista.length > 0 &&
+                            <div>
+                                {lista.map(el => {
+                                    return (
+                                        <div key={el} className="mt-2 flex bg-gray-200 px-3 rounded-full w-fit items-center" >
+                                            <label className="text-lg" >{el}</label>
+                                            <img src={require("../../image/x.png")} alt="X" className="w-4 h-4 ml-2"  onClick={()=>_onDeleteItem(el)}/>
+                                        </div>
+                                    )
+                                })}
+                            </div>    
+                        }
 
-                {
-                    lista.length > 0 &&
-                    <div className="w-full flex justify-center mt-3">
-                        <button className="w-fit bg-sky-500 text-white px-10 py-1 rounded-full">
-                            Cerca ricetta
-                        </button>
+                        {
+                            lista.length > 0 &&
+                            <div className="w-full flex justify-center mt-3">
+                                <button className="w-fit bg-sky-500 text-white px-10 py-1 text-xl rounded-full">
+                                    Cerca ricetta
+                                </button>
+                            </div>
+                        }
                     </div>
-                }
+                </div>
             </div>
-
         </div>
     )
 }
