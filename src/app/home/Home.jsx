@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { ingredienti } from "../../database/database";
 import Header from "../header/Header";
 
 export default function Home(){
 
-    let risultato_ingredienti = ["farina","farina 00", "farina 0", "farina 1", "farina 2","uova","melone", "marmellata di albicocca", "semola", "farina integrale" ]
+    let risultato_ingredienti = ingredienti
 
     const [ ingrediente, setIngrediente ] = useState("")
     const [ visualizza, setVisualizza ] = useState(false)
