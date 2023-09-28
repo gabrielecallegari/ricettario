@@ -1,4 +1,4 @@
-# Infromation About how to running the applicazion
+# Infromation About how to running the application (Actually Mobile First) 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
